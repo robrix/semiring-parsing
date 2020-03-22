@@ -14,7 +14,8 @@ copyright:           2020 Rob Rix
 category:            Language
 
 library
-  -- exposed-modules:
+  exposed-modules:
+    Data.Semiring
   build-depends:
     , base ^>=4.13.0.0
   hs-source-dirs: src
