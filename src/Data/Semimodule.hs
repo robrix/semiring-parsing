@@ -49,5 +49,5 @@ instance (Monoid r, Semiring r) => LeftSemimodule r (Identity r) where
 
 
 class (Semiring r, Monoid m) => RightSemimodule r m | m -> r where
-  (>><) :: r -> m -> m
-  infixr 7 >><
+  (>><) :: m -> r -> m
+  infixl 7 >><
