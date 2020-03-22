@@ -3,7 +3,10 @@
 module Data.Indexable
 ( Indexable(..)
 , Singleton(..)
+, single
 ) where
+
+import Data.Semiring
 
 class Indexable a b x | x -> a b where
   (!) :: x -> a -> b
@@ -19,3 +22,6 @@ class Indexable a b x => Singleton a b x where
 
 instance (Eq a, Monoid b) => Singleton a b (a -> b) where
   a |-> b = \ a' -> if a == a' then b else mempty
+
+single :: (Singleton a b x, Unital b) => a -> x
+single = (|-> one)
