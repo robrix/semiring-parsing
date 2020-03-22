@@ -15,6 +15,7 @@ category:            Language
 
 library
   exposed-modules:
+    Data.Functor.Trie
     Data.Indexable
     Data.Map.Modular
     Data.Semimodule
