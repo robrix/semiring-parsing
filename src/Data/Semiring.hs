@@ -8,6 +8,7 @@ module Data.Semiring
 , Star(..)
 ) where
 
+import Data.Functor.Const
 import Data.Functor.Identity
 
 -- | The zero of a 'Monoid', defined as a synonym for 'mempty'.
@@ -50,6 +51,7 @@ class Semigroup r => Semiring r where
   (><) :: r -> r -> r
   infixr 7 ><
 
+deriving instance Semiring r => Semiring (Const r a)
 deriving instance Semiring r => Semiring (Identity r)
 
 
@@ -64,6 +66,7 @@ deriving instance Semiring r => Semiring (Identity r)
 class (Monoid r, Semiring r) => Unital r where
   one :: r
 
+deriving instance Unital r => Unital (Const r a)
 deriving instance Unital r => Unital (Identity r)
 
 
@@ -76,4 +79,5 @@ class Unital r => Star r where
   star :: r -> r
   star p = one <> p >< star p
 
+deriving instance Star r => Star (Const r a)
 deriving instance Star r => Star (Identity r)
