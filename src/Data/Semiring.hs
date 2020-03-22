@@ -1,3 +1,4 @@
+-- | Semirings of various flavours.
 module Data.Semiring
 ( zero
 , Semiring(..)
