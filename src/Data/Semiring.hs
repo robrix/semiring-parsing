@@ -1,3 +1,5 @@
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE StandaloneDeriving #-}
 -- | Semirings of various flavours.
 module Data.Semiring
 ( zero
@@ -5,6 +7,8 @@ module Data.Semiring
 , Unital(..)
 , Star(..)
 ) where
+
+import Data.Functor.Identity
 
 -- | The zero of a 'Monoid', defined as a synonym for 'mempty'.
 zero :: Monoid a => a
@@ -45,6 +49,8 @@ zero = mempty
 class Semigroup r => Semiring r where
   (><) :: r -> r -> r
   infixr 7 ><
+
+deriving instance Semiring r => Semiring (Identity r)
 
 
 -- | 'Unital' 'Semiring's are 'Monoid'al 'Semiring's with an addiitonal constant 'one' serving as the left- and right-identity of '><'.
