@@ -35,3 +35,6 @@ instance (Ord k, Semigroup k, Monoid v, Semiring v) => Semiring (Map k v) where
     | u <- Map.keys (getMap p)
     , v <- Map.keys (getMap q)
     ]
+
+instance (Ord k, Monoid k, Unital v) => Unital (Map k v) where
+  one = zero |-> one
