@@ -64,6 +64,8 @@ deriving instance Semiring r => Semiring (Identity r)
 class (Monoid r, Semiring r) => Unital r where
   one :: r
 
+deriving instance Unital r => Unital (Identity r)
+
 
 -- | Star 'Semiring's are 'Unital' semirings admitting infinite combinations via the Kleene 'star' (or closure) operation.
 --
