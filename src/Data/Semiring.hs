@@ -48,5 +48,12 @@ class Semigroup r => Semiring r where
 
 
 -- | 'Unital' 'Semiring's are 'Monoid'al 'Semiring's with an addiitonal constant 'one' serving as the left- and right-identity of '><'.
+--
+-- @
+-- 'one' '><' a = a
+-- @
+-- @
+-- a '><' 'one' = a
+-- @
 class (Monoid r, Semiring r) => Unital r where
   one :: r
