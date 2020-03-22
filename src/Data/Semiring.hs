@@ -5,6 +5,7 @@ module Data.Semiring
 , Unital(..)
 ) where
 
+-- | The zero of a 'Monoid', defined as a synonym for 'mempty'.
 zero :: Monoid a => a
 zero = mempty
 
