@@ -45,5 +45,6 @@ class Semigroup r => Semiring r where
   infixr 7 ><
 
 
+-- | 'Unital' 'Semiring's are 'Monoid'al 'Semiring's with an addiitonal constant 'one' serving as the left- and right-identity of '><'.
 class (Monoid r, Semiring r) => Unital r where
   one :: r
