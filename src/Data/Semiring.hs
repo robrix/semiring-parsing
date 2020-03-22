@@ -10,6 +10,36 @@ zero = mempty
 
 
 -- | A 'Semiring' is a commutative 'Semigroup' with an additional associative operation, '><', which distributes over '<>'. E.g. if '<>' is “addition,” then '><' is “multiplication.”
+--
+-- Laws:
+--
+-- Commutativity of '<>':
+--
+-- @
+-- a '<>' b = b '<>' a
+-- @
+--
+-- Associativity of '><':
+--
+-- @
+-- a '><' (b '><' c) = (a '><' b) '><' c
+-- @
+--
+-- Left- and right-distributivity of '><' over '<>':
+--
+-- @
+-- a '><' (b '<>' c) = a '><' b '<>' a '><' c
+-- @
+-- @
+-- (a '<>' b) '><' c = a '><' c '<>' b '><' c
+-- @
+--
+-- If @r@ is a 'Monoid', then 'mempty' must be a left- and right-annihilator for '><':
+--
+-- @
+-- 'mempty' '><' a = 'mempty'
+-- a '><' 'mempty' = 'mempty'
+-- @
 class Semigroup r => Semiring r where
   (><) :: r -> r -> r
   infixr 7 ><
