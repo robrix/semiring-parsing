@@ -5,3 +5,5 @@ module Data.Functor.Trie
 
 data Trie i a = a :< i (Trie i a)
   deriving (Foldable, Functor, Traversable)
+
+infixr 5 :<
