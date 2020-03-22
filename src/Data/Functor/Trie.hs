@@ -28,3 +28,6 @@ instance (Monoid a, Functor i, LeftSemimodule a (i (Trie i a))) => Semiring (Tri
 
 instance (Unital a, Functor i, LeftSemimodule a (i (Trie i a))) => Unital (Trie i a) where
   one = one :< zero
+
+instance (Star a, Functor i, LeftSemimodule a (i (Trie i a))) => Star (Trie i a) where
+  star (h :< t) = q where q = star h ><< (one :< fmap (>< q) t)
