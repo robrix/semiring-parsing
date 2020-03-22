@@ -4,6 +4,7 @@ module Data.Indexable
 ( Indexable(..)
 , Singleton(..)
 , single
+, value
 ) where
 
 import Data.Semiring
@@ -25,3 +26,6 @@ instance (Eq a, Monoid b) => Singleton a b (a -> b) where
 
 single :: (Singleton a b x, Unital b) => a -> x
 single = (|-> one)
+
+value :: (Singleton a b x, Monoid a) => b -> x
+value = (zero |->)
