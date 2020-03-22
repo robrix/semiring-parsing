@@ -2,7 +2,8 @@
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE TypeFamilies #-}
 module Data.Indexable
-( Indexable(..)
+( Key
+, Indexable(..)
 , Singleton(..)
 , single
 , value
