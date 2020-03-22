@@ -1,2 +1,5 @@
 module Data.Functor.Trie
-() where
+( Trie(..)
+) where
+
+data Trie i a = a :< i (Trie i a)
