@@ -1,5 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE TypeFamilies #-}
 module Data.Indexable
 ( Indexable(..)
 , Singleton(..)
@@ -8,6 +9,9 @@ module Data.Indexable
 ) where
 
 import Data.Semiring
+import Data.Kind (Type)
+
+type family Key (f :: Type -> Type) :: Type
 
 class Indexable a b x | x -> a b where
   (!) :: x -> a -> b
