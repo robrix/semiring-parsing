@@ -38,6 +38,8 @@ zero = mempty
 --
 -- @
 -- 'mempty' '><' a = 'mempty'
+-- @
+-- @
 -- a '><' 'mempty' = 'mempty'
 -- @
 class Semigroup r => Semiring r where
