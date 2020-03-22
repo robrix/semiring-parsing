@@ -8,3 +8,4 @@ import Data.Semiring
 
 class (Semiring r, Monoid m) => LeftSemimodule r m | m -> r where
   (><<) :: r -> m -> m
+  infixr 7 ><<
