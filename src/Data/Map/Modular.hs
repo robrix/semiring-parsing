@@ -5,6 +5,7 @@ module Data.Map.Modular
 ( Map(..)
 ) where
 
+import           Data.Foldable (fold)
 import           Data.Indexable
 import           Data.Semimodule
 import           Data.Semiring
@@ -27,3 +28,10 @@ instance (Ord k, Monoid v) => Monoid (Map k v) where
 
 instance (Ord k, Monoid v, Semiring v) => LeftSemimodule v (Map k v) where
   v ><< m = (v ><) <$> m
+
+instance (Ord k, Semigroup k, Monoid v, Semiring v) => Semiring (Map k v) where
+  p >< q = fold
+    [ u <> v |-> p ! u >< q ! v
+    | u <- Map.keys (getMap p)
+    , v <- Map.keys (getMap q)
+    ]
