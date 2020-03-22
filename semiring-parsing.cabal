@@ -15,6 +15,7 @@ category:            Language
 
 library
   exposed-modules:
+    Data.Semimodule
     Data.Semiring
   build-depends:
     , base ^>=4.13.0.0
