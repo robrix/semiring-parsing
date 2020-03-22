@@ -8,6 +8,7 @@ zero :: Monoid a => a
 zero = mempty
 
 
+-- | A 'Semiring' is a commutative 'Semigroup' with an additional associative operation, '><', which distributes over '<>'. E.g. if '<>' is “addition,” then '><' is “multiplication.”
 class Semigroup r => Semiring r where
   (><) :: r -> r -> r
   infixr 7 ><
