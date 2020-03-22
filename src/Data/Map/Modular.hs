@@ -11,3 +11,6 @@ newtype Map k v = Map { getMap :: Map.Map k v }
 
 instance (Ord k, Monoid v) => Indexable k v (Map k v) where
   m ! k = Map.findWithDefault mempty k (getMap m)
+
+instance (Ord k, Monoid v) => Singleton k v (Map k v) where
+  (|->) = fmap Map . Map.singleton
