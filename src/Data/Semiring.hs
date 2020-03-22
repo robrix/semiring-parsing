@@ -75,3 +75,5 @@ deriving instance Unital r => Unital (Identity r)
 class Unital r => Star r where
   star :: r -> r
   star p = one <> p >< star p
+
+deriving instance Star r => Star (Identity r)
