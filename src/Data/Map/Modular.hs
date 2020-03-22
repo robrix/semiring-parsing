@@ -17,3 +17,6 @@ instance (Ord k, Monoid v) => Singleton k v (Map k v) where
 
 instance (Ord k, Semigroup v) => Semigroup (Map k v) where
   Map a <> Map b = Map (Map.unionWith (<>) a b)
+
+instance (Ord k, Monoid v) => Monoid (Map k v) where
+  mempty = Map Map.empty
