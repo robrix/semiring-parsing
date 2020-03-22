@@ -25,3 +25,6 @@ instance (Monoid a, Semiring a, Functor i, Monoid (i (Trie i a))) => LeftSemimod
 
 instance (Monoid a, Functor i, LeftSemimodule a (i (Trie i a))) => Semiring (Trie i a) where
   (h :< t) >< q = h ><< q <> (zero :< fmap (>< q) t)
+
+instance (Unital a, Functor i, LeftSemimodule a (i (Trie i a))) => Unital (Trie i a) where
+  one = one :< zero
