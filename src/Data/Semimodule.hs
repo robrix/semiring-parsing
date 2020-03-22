@@ -6,6 +6,7 @@ module Data.Semimodule
 
 import Data.Semiring
 
+-- | Left-semimodules lift a 'Semiring'’s '><' operation to the semimodule’s elements.
 class (Semiring r, Monoid m) => LeftSemimodule r m | m -> r where
   (><<) :: r -> m -> m
   infixr 7 ><<
