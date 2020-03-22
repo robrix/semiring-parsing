@@ -6,6 +6,8 @@ module Data.Map.Modular
 ) where
 
 import           Data.Indexable
+import           Data.Semimodule
+import           Data.Semiring
 import qualified Data.Map as Map
 
 newtype Map k v = Map { getMap :: Map.Map k v }
@@ -22,3 +24,6 @@ instance (Ord k, Semigroup v) => Semigroup (Map k v) where
 
 instance (Ord k, Monoid v) => Monoid (Map k v) where
   mempty = Map Map.empty
+
+instance (Ord k, Monoid v, Semiring v) => LeftSemimodule v (Map k v) where
+  v ><< m = (v ><) <$> m
