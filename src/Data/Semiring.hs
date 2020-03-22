@@ -3,6 +3,7 @@ module Data.Semiring
 ( zero
 , Semiring(..)
 , Unital(..)
+, Star(..)
 ) where
 
 -- | The zero of a 'Monoid', defined as a synonym for 'mempty'.
@@ -58,3 +59,7 @@ class Semigroup r => Semiring r where
 -- @
 class (Monoid r, Semiring r) => Unital r where
   one :: r
+
+
+class Star r where
+  star :: r -> r
