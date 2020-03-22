@@ -22,3 +22,6 @@ instance (Monoid a, Monoid (i (Trie i a))) => Monoid (Trie i a) where
 
 instance (Monoid a, Semiring a, Functor i, Monoid (i (Trie i a))) => LeftSemimodule a (Trie i a) where
   s ><< (h :< t) = s >< h :< fmap (s ><<) t
+
+instance (Monoid a, Functor i, LeftSemimodule a (i (Trie i a))) => Semiring (Trie i a) where
+  (h :< t) >< q = h ><< q <> (zero :< fmap (>< q) t)
