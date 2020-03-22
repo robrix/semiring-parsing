@@ -61,5 +61,5 @@ class (Monoid r, Semiring r) => Unital r where
   one :: r
 
 
-class Star r where
+class Unital r => Star r where
   star :: r -> r
