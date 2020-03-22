@@ -60,5 +60,9 @@ class (Monoid r, Semiring r) => Unital r where
 
 
 -- | Star 'Semiring's are 'Unital' semirings admitting infinite combinations via the Kleene 'star' (or closure) operation.
+--
+-- @
+-- 'star' p = 'one' '<>' p '><' 'star' p
+-- @
 class Unital r => Star r where
   star :: r -> r
