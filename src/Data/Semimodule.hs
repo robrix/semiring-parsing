@@ -34,6 +34,8 @@ import Data.Semiring
 -- @
 -- 'one' '><<' a = a
 -- @
+--
+-- Finally, if @r@ is a commutative 'Semiring', @m@ is both a left- and right-semimodule over @r@, and their operations coincide.
 class (Semiring r, Monoid m) => LeftSemimodule r m | m -> r where
   (><<) :: r -> m -> m
   infixr 7 ><<
