@@ -1,2 +1,6 @@
 module Data.Semiring
-() where
+( zero
+) where
+
+zero :: Monoid a => a
+zero = mempty
