@@ -66,3 +66,4 @@ class (Monoid r, Semiring r) => Unital r where
 -- @
 class Unital r => Star r where
   star :: r -> r
+  star p = one <> p >< star p
