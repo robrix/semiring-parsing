@@ -19,11 +19,11 @@ b = single "b"
 atoz :: (Singleton String b x, Unital b, Monoid x) => x
 atoz = fold [ single [c] | c <- ['a'..'z'] ]
 
-fishy :: (Singleton String b x, Unital b, Star x) => x
-fishy = star atoz >< single "fish" >< star atoz
+fishy :: (Singleton String b x, Unital b, Closed x) => x
+fishy = closure atoz >< single "fish" >< closure atoz
 
 anbn :: (Singleton String b x, Unital b, Unital x) => x
 anbn = one <> a >< anbn >< b
 
-dyck :: (Singleton String b x, Unital b, Star x) => x
-dyck = star (single "[" >< dyck >< single "]")
+dyck :: (Singleton String b x, Unital b, Closed x) => x
+dyck = closure (single "[" >< dyck >< single "]")

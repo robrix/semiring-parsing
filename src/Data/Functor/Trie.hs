@@ -38,8 +38,8 @@ instance (IsOne a, Functor (i c), Monoid (i c (Trie i c a))) => Unital (Trie i c
 instance (IsOne a, Functor (i c), IsZero (i c (Trie i c a))) => IsOne (Trie i c a) where
   isOne (h :< t) = isOne h && isZero t
 
-instance (IsOne a, Star a, Functor (i c), Monoid (i c (Trie i c a))) => Star (Trie i c a) where
-  star (h :< t) = q where q = star h ><< (one :< fmap (>< q) t)
+instance (IsOne a, Closed a, Functor (i c), Monoid (i c (Trie i c a))) => Closed (Trie i c a) where
+  closure (h :< t) = q where q = closure h ><< (one :< fmap (>< q) t)
 
 instance Indexable c (Trie i c a) (i c (Trie i c a)) => Indexable [c] a (Trie i c a) where
   (!) (b :< dp) = b <| (!) . (dp !)

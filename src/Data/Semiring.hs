@@ -8,7 +8,7 @@ module Data.Semiring
 , Semiring(..)
 , Unital(..)
 , IsOne(..)
-, Star(..)
+, Closed(..)
   -- * Concrete semirings
 , Arith(..)
 , Few(..)
@@ -167,33 +167,33 @@ instance (IsZero a, Ord a) => IsOne (Set.Set a) where
     _              -> False
 
 
--- | Star 'Semiring's are 'Unital' semirings admitting infinite combinations via the Kleene 'star' (or closure) operation.
+-- | Closed 'Semiring's are 'Unital' semirings admitting infinite combinations via the Kleene 'closure' (or closure) operation.
 --
 -- @
--- 'star' p = 'one' '<>' p '><' 'star' p
+-- 'closure' p = 'one' '<>' p '><' 'closure' p
 -- @
-class Unital r => Star r where
-  star :: r -> r
-  star p = one <> p >< star p
+class Unital r => Closed r where
+  closure :: r -> r
+  closure p = one <> p >< closure p
 
-deriving instance Star r => Star (Const r a)
-deriving instance Star r => Star (Identity r)
+deriving instance Closed r => Closed (Const r a)
+deriving instance Closed r => Closed (Identity r)
 
-instance Star () where
-  star _ = ()
+instance Closed () where
+  closure _ = ()
 
-instance (Star a, Star b) => Star (a, b) where
-  star (a, b) = (star a, star b)
+instance (Closed a, Closed b) => Closed (a, b) where
+  closure (a, b) = (closure a, closure b)
 
-instance (Star a, Star b, Star c) => Star (a, b, c) where
-  star (a, b, c) = (star a, star b, star c)
+instance (Closed a, Closed b, Closed c) => Closed (a, b, c) where
+  closure (a, b, c) = (closure a, closure b, closure c)
 
-instance (Star a, Star b, Star c, Star d) => Star (a, b, c, d) where
-  star (a, b, c, d) = (star a, star b, star c, star d)
+instance (Closed a, Closed b, Closed c, Closed d) => Closed (a, b, c, d) where
+  closure (a, b, c, d) = (closure a, closure b, closure c, closure d)
 
-instance Star b => Star (a -> b)
+instance Closed b => Closed (a -> b)
 
-instance (Monoid a, Ord a) => Star (Set.Set a)
+instance (Monoid a, Ord a) => Closed (Set.Set a)
 
 
 newtype Arith a = Arith { getArith :: a }
@@ -248,9 +248,9 @@ instance Unital Few where
 instance IsOne Few where
   isOne = (== One)
 
-instance Star Few where
-  star Zero = one
-  star _    = More
+instance Closed Few where
+  closure Zero = one
+  closure _    = More
 
 
 newtype Boolean = Boolean { getBoolean :: Bool }
@@ -274,5 +274,5 @@ instance Unital Boolean where
 instance IsOne Boolean where
   isOne = (== one)
 
-instance Star Boolean where
-  star _ = one
+instance Closed Boolean where
+  closure _ = one
