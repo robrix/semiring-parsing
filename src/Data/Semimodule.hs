@@ -7,8 +7,9 @@ module Data.Semimodule
 , (><<)
 ) where
 
-import Data.Functor.Identity
-import Data.Semiring
+import           Data.Functor.Identity
+import           Data.Semiring
+import qualified Data.Set as Set
 
 -- | Left-semimodules lift a 'Semiring'’s '><' operation to the semimodule’s elements.
 --
@@ -72,3 +73,6 @@ instance (LeftSemimodule r a, LeftSemimodule r b, LeftSemimodule r c, LeftSemimo
 
 instance Semiring r => LeftSemimodule r [r] where
   mul a = map (a ><)
+
+instance Ord a => LeftSemimodule Boolean (Set.Set a) where
+  mul a b = if getBoolean a then b else zero
