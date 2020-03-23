@@ -17,6 +17,7 @@ type family Key (f :: Type -> Type) :: Type
 
 type instance Key ((->) k) = k
 
+
 class Indexable a b x | x -> a b where
   (!) :: x -> a -> b
   infixl 9 !
