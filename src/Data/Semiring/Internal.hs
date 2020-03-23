@@ -59,10 +59,6 @@ class Monoid a => Splittable a where
 instance (Enum a, Num a) => Splittable (Sum a) where
   splits n = [ (Sum i, n - Sum i) | i <- [0..getSum n] ]
 
-instance Splittable [a] where
-  splits []     = [([], [])]
-  splits (c:cs) = ([], c:cs) : [ (c:l, r) | (l, r) <- splits cs ]
-
 
 -- | A 'Semiring' is a commutative 'Semigroup' with an additional associative operation, '><', which distributes over '<>'. E.g. if '<>' is “addition,” then '><' is “multiplication.”
 --
