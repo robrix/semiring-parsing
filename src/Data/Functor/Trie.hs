@@ -1,11 +1,13 @@
 {-# LANGUAGE DeriveTraversable #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
 module Data.Functor.Trie
 ( Trie(..)
 ) where
 
+import Data.Indexable
 import Data.Semimodule
 import Data.Semiring
 
@@ -31,3 +33,8 @@ instance (Unital a, Functor i, LeftSemimodule a (i (Trie i a))) => Unital (Trie 
 
 instance (Star a, Functor i, LeftSemimodule a (i (Trie i a))) => Star (Trie i a) where
   star (h :< t) = q where q = star h ><< (one :< fmap (>< q) t)
+
+instance (c ~ Key i, Monoid a, Monoid (i (Trie i a)), Singleton c (Trie i a) (i (Trie i a))) => Indexable [c] a (Trie i a) where
+  (b :< dp) ! w = case w of
+    []   -> b
+    c:cs -> dp ! c ! cs
