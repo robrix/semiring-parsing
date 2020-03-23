@@ -27,6 +27,9 @@ zero = mempty
 class Monoid a => IsZero a where
   isZero :: a -> Bool
 
+deriving instance IsZero r => IsZero (Const r a)
+deriving instance IsZero r => IsZero (Identity r)
+
 instance IsZero () where
   isZero _ = True
 
@@ -120,6 +123,9 @@ instance (Unital a, Unital b, Unital c, Unital d) => Unital (a, b, c, d) where
 
 class Unital r => IsOne r where
   isOne :: r -> Bool
+
+deriving instance IsOne r => IsOne (Const r a)
+deriving instance IsOne r => IsOne (Identity r)
 
 instance IsOne () where
   isOne _ = True
