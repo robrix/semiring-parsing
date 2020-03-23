@@ -6,6 +6,8 @@ module Data.Semiring
 , Semiring(..)
 , Unital(..)
 , Star(..)
+  -- * Zero semiring
+, Zero(..)
 ) where
 
 import Data.Functor.Const
@@ -117,3 +119,6 @@ instance (Star a, Star b, Star c) => Star (a, b, c) where
 
 instance (Star a, Star b, Star c, Star d) => Star (a, b, c, d) where
   star (a, b, c, d) = (star a, star b, star c, star d)
+
+
+newtype Zero = Zero { isZero :: Bool }
