@@ -21,7 +21,6 @@ library
     Data.Semimodule
     Data.Semiring
   other-modules:
-    Data.Semiring.Internal
     Examples
   build-depends:
     , base ^>=4.13.0.0
