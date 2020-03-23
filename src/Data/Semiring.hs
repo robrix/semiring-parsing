@@ -121,7 +121,7 @@ instance (Unital a, Unital b, Unital c, Unital d) => Unital (a, b, c, d) where
   one = (one, one, one, one)
 
 
-class Unital r => IsOne r where
+class (IsZero r, Unital r) => IsOne r where
   isOne :: r -> Bool
 
 deriving instance IsOne r => IsOne (Const r a)
