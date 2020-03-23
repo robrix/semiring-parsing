@@ -15,6 +15,7 @@ module Data.Semiring
 , Boolean(..)
 ) where
 
+import Data.Coerce (coerce)
 import Data.Functor.Const
 import Data.Functor.Identity
 import Data.Ix
@@ -223,3 +224,6 @@ instance Star Few where
 
 
 newtype Boolean = Boolean { getBoolean :: Bool }
+
+instance Semigroup Boolean where
+  (<>) = coerce (||)
