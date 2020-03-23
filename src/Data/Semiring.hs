@@ -170,3 +170,6 @@ instance Semigroup IsOne where
 
 instance Monoid IsOne where
   mempty = IsOne False
+
+instance Semiring IsOne where
+  (><) = coerce (&&)
