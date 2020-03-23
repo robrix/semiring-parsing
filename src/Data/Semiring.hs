@@ -4,6 +4,7 @@
 -- | Semirings of various flavours.
 module Data.Semiring
 ( zero
+, IsZero(..)
 , Semiring(..)
 , Unital(..)
 , Star(..)
@@ -20,6 +21,10 @@ import Data.Ix
 -- | The zero of a 'Monoid', defined as a synonym for 'mempty'.
 zero :: Monoid a => a
 zero = mempty
+
+
+class IsZero a where
+  isZero :: a -> Bool
 
 
 -- | A 'Semiring' is a commutative 'Semigroup' with an additional associative operation, '><', which distributes over '<>'. E.g. if '<>' is “addition,” then '><' is “multiplication.”
