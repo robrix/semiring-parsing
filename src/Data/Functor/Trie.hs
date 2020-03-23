@@ -35,6 +35,9 @@ instance (IsOne a, Functor (i c), Monoid (i c (Trie i c a))) => Semiring (Trie i
 instance (IsOne a, Functor (i c), Monoid (i c (Trie i c a))) => Unital (Trie i c a) where
   one = one :< zero
 
+instance (IsOne a, Functor (i c), IsZero (i c (Trie i c a))) => IsOne (Trie i c a) where
+  isOne (h :< t) = isOne h && isZero t
+
 instance (IsOne a, Star a, Functor (i c), Monoid (i c (Trie i c a))) => Star (Trie i c a) where
   star (h :< t) = q where q = star h ><< (one :< fmap (>< q) t)
 
