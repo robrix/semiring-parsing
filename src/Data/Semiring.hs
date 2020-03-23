@@ -143,6 +143,7 @@ instance Num a => Unital (Arith a) where
 
 
 newtype IsZero = IsZero { isZero :: Bool }
+  deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
 
 instance Semigroup IsZero where
   (<>) = coerce (&&)
