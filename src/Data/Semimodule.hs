@@ -1,16 +1,13 @@
-{-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE UndecidableInstances #-}
 -- | A left- or right-semimodule over a 'Semiring' generalizes the concept of a vector space over a field.
 module Data.Semimodule
 ( LeftSemimodule(..)
-, Opt(..)
+, (><<)
 ) where
 
 import Data.Functor.Identity
-import Data.Ix
 import Data.Semiring
 
 -- | Left-semimodules lift a 'Semiring'’s '><' operation to the semimodule’s elements.
@@ -44,37 +41,34 @@ import Data.Semiring
 --
 -- Finally, if @r@ is a commutative 'Semiring', @m@ is both a left- and right-semimodule over @r@, and their operations coincide.
 class (Semiring r, Monoid m) => LeftSemimodule r m | m -> r where
-  (><<) :: r -> m -> m
-  infixr 7 ><<
+  mul :: r -> m -> m
+
+(><<) :: (LeftSemimodule r m, IsOne r) => r -> m -> m
+r ><< m
+  | isZero r  = zero
+  | isOne  r  = m
+  | otherwise = mul r m
+
+infixr 7 ><<
 
 instance (Monoid r, Semiring r) => LeftSemimodule r (a -> r) where
-  a ><< b = (a ><) <$> b
+  mul a b = (a ><) <$> b
 
 -- | Every 'Semiring' forms a 'LeftSemimodule' with itself, which we model using 'Identity' to avoid overlapping instances.
 instance (Monoid r, Semiring r) => LeftSemimodule r (Identity r) where
-  a ><< b = (a ><) <$> b
+  mul a b = (a ><) <$> b
 
 instance LeftSemimodule () () where
-  _ ><< _ = ()
+  mul _ _ = ()
 
 instance (LeftSemimodule r a, LeftSemimodule r b) => LeftSemimodule r (a, b) where
-  a ><< (b, c) = (a ><< b, a ><< c)
+  mul a (b, c) = (mul a b, mul a c)
 
 instance (LeftSemimodule r a, LeftSemimodule r b, LeftSemimodule r c) => LeftSemimodule r (a, b, c) where
-  a ><< (b, c, d) = (a ><< b, a ><< c, a ><< d)
+  mul a (b, c, d) = (mul a b, mul a c, mul a d)
 
 instance (LeftSemimodule r a, LeftSemimodule r b, LeftSemimodule r c, LeftSemimodule r d) => LeftSemimodule r (a, b, c, d) where
-  a ><< (b, c, d, e) = (a ><< b, a ><< c, a ><< d, a ><< e)
+  mul a (b, c, d, e) = (mul a b, mul a c, mul a d, mul a e)
 
 instance Semiring r => LeftSemimodule r [r] where
-  a ><< b = map (a ><) b
-
-
--- | Optimize another semimodule by applying the annihilation & identity laws.
-newtype Opt a = Opt { getOpt :: a }
-  deriving (Bounded, Enum, Eq, Ix, Functor, Monoid, Num, Ord, Read, Semigroup, Show)
-
-instance LeftSemimodule r a => LeftSemimodule (Few, r) (Opt a) where
-  (Zero, _) ><< _ = zero
-  (One,  _) ><< b = b
-  (_,    a) ><< b = Opt $ a ><< getOpt b
+  mul a = map (a ><)

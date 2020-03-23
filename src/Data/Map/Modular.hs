@@ -28,7 +28,7 @@ instance (Ord k, Monoid v) => Monoid (Map k v) where
   mempty = Map Map.empty
 
 instance (Ord k, Monoid v, Semiring v) => LeftSemimodule v (Map k v) where
-  v ><< m = (v ><) <$> m
+  mul v m = (v ><) <$> m
 
 instance (Ord k, Semigroup k, Monoid v, Semiring v) => Semiring (Map k v) where
   p >< q = fold
