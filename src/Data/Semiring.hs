@@ -161,6 +161,11 @@ instance (IsOne a, IsOne b, IsOne c) => IsOne (a, b, c) where
 instance (IsOne a, IsOne b, IsOne c, IsOne d) => IsOne (a, b, c, d) where
   isOne (a, b, c, d) = isOne a && isOne b && isOne c && isOne d
 
+instance (IsZero a, Ord a) => IsOne (Set.Set a) where
+  isOne s = case Set.toList s of
+    [a] | isZero a -> True
+    _              -> False
+
 
 -- | Star 'Semiring's are 'Unital' semirings admitting infinite combinations via the Kleene 'star' (or closure) operation.
 --
