@@ -273,6 +273,10 @@ instance Num a => Semiring (Count a) where
 instance Num a => Unital (Count a) where
   one = Finite 1
 
+instance (Num a, IsZero a) => Closed (Count a) where
+  closure (Finite a) | isZero a = one
+  closure _                     = Infinity
+
 
 newtype Boolean = Boolean { getBoolean :: Bool }
   deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
