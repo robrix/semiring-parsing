@@ -169,6 +169,10 @@ instance Semiring Few where
 instance Unital Few where
   one = One
 
+instance Star Few where
+  star Zero = one
+  star _    = More
+
 
 newtype IsZero = IsZero { isZero :: Bool }
   deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
