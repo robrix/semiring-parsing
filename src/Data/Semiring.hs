@@ -138,6 +138,9 @@ instance Num a => Monoid (Arith a) where
 instance Num a => Semiring (Arith a) where
   (><) = (*)
 
+instance Num a => Unital (Arith a) where
+  one = 1
+
 
 newtype IsZero = IsZero { isZero :: Bool }
 
