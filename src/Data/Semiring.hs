@@ -54,6 +54,9 @@ class Semigroup r => Semiring r where
 deriving instance Semiring r => Semiring (Const r a)
 deriving instance Semiring r => Semiring (Identity r)
 
+instance (Semiring a, Semiring b) => Semiring (a, b) where
+  (a1, b1) >< (a2, b2) = (a1 >< a2, b1 >< b2)
+
 
 -- | 'Unital' 'Semiring's are 'Monoid'al 'Semiring's with an addiitonal constant 'one' serving as the left- and right-identity of '><'.
 --
