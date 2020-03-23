@@ -174,11 +174,17 @@ instance Num a => Semigroup (Arith a) where
 instance Num a => Monoid (Arith a) where
   mempty = 0
 
+instance (Eq a, Num a) => IsZero (Arith a) where
+  isZero = (== 0)
+
 instance Num a => Semiring (Arith a) where
   (><) = (*)
 
 instance Num a => Unital (Arith a) where
   one = 1
+
+instance (Eq a, Num a) => IsOne (Arith a) where
+  isOne = (== 0)
 
 
 data Few
