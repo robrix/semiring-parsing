@@ -227,3 +227,6 @@ newtype Boolean = Boolean { getBoolean :: Bool }
 
 instance Semigroup Boolean where
   (<>) = coerce (||)
+
+instance Monoid Boolean where
+  mempty = Boolean False
