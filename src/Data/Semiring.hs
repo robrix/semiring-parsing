@@ -233,3 +233,6 @@ instance Monoid Boolean where
 
 instance Semiring Boolean where
   (><) = coerce (&&)
+
+instance Unital Boolean where
+  one = Boolean True
