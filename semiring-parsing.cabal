@@ -13,7 +13,24 @@ maintainer:          rob.rix@me.com
 copyright:           2020 Rob Rix
 category:            Language
 
+common common
+  default-language: Haskell2010
+  ghc-options:
+    -Weverything
+    -Wno-all-missed-specialisations
+    -Wno-implicit-prelude
+    -Wno-missed-specialisations
+    -Wno-missing-import-lists
+    -Wno-missing-local-signatures
+    -Wno-monomorphism-restriction
+    -Wno-name-shadowing
+    -Wno-safe
+    -Wno-unsafe
+  if (impl(ghc >= 8.8))
+    ghc-options: -Wno-missing-deriving-strategies
+
 library
+  import: common
   exposed-modules:
     Data.Functor.Trie
     Data.Indexable
@@ -26,4 +43,3 @@ library
     , base ^>=4.13.0.0
     , containers
   hs-source-dirs: src
-  default-language: Haskell2010
