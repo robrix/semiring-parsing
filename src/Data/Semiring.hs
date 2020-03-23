@@ -228,6 +228,7 @@ instance Star Few where
 
 
 newtype Boolean = Boolean { getBoolean :: Bool }
+  deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
 
 instance Semigroup Boolean where
   (<>) = coerce (||)
