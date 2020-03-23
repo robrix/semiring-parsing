@@ -129,3 +129,6 @@ instance Semigroup IsZero where
 
 instance Monoid IsZero where
   mempty = IsZero True
+
+instance Semiring IsZero where
+  (><) = coerce (||)
