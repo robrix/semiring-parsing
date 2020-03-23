@@ -5,6 +5,7 @@ module Examples
 , atoz
 , fishy
 , anbn
+, dyck
 ) where
 
 import Data.Foldable (fold)
@@ -23,3 +24,6 @@ fishy = star atoz >< single "fish" >< star atoz
 
 anbn :: (Singleton String b x, Unital b, Unital x) => x
 anbn = one <> a >< anbn >< b
+
+dyck :: (Singleton String b x, Unital b, Star x) => x
+dyck = star (single "[" >< dyck >< single "]")
