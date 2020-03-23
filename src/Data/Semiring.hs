@@ -4,7 +4,6 @@
 module Data.Semiring
 ( zero
 , IsZero(..)
-, Splittable(..)
 , Semiring(..)
 , Unital(..)
 , IsOne(..)

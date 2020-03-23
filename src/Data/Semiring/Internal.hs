@@ -6,7 +6,6 @@
 module Data.Semiring.Internal
 ( zero
 , IsZero(..)
-, Splittable(..)
 , Semiring(..)
 , Unital(..)
 , IsOne(..)
@@ -49,11 +48,6 @@ instance (IsZero a, IsZero b, IsZero c, IsZero d) => IsZero (a, b, c, d) where
 
 instance Ord a => IsZero (Set.Set a) where
   isZero = Set.null
-
-
--- | 'Splittable' 'Monoid's have an additional 'splits' operation, a multi-valued inverse of '<>'.
-class Monoid a => Splittable a where
-  splits :: a -> [(a, a)]
 
 
 -- | A 'Semiring' is a commutative 'Semigroup' with an additional associative operation, '><', which distributes over '<>'. E.g. if '<>' is “addition,” then '><' is “multiplication.”
