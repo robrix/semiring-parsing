@@ -1,10 +1,12 @@
 {-# LANGUAGE DeriveTraversable #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
 module Data.Functor.Trie
 ( Trie(..)
+, (<|)
 ) where
 
 import Data.Indexable
@@ -41,3 +43,11 @@ instance (c ~ Key i, Monoid a, Monoid (i (Trie i a)), Singleton c (Trie i a) (i 
 
 instance (c ~ Key i, Monoid a, Monoid (i (Trie i a)), Singleton c (Trie i a) (i (Trie i a))) => Singleton [c] a (Trie i a) where
   w |-> b = foldr (\ c t -> zero :< (c |-> t)) (b :< zero) w
+
+
+(<|) :: b -> (c -> ([c] -> b)) -> ([c] -> b)
+b <| h = \case
+  []   -> b
+  c:cs -> h c cs
+
+infix 1 <|
