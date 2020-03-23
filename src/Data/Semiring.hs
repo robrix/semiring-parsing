@@ -282,8 +282,8 @@ instance IsOne a => IsOne (Count a) where
   isOne _                    = False
 
 instance (IsZero a, Unital a) => Closed (Count a) where
-  closure (Finite a) | isZero a = one
-  closure _                     = Infinity
+  closure a | isZero a = one
+  closure _            = Infinity
 
 
 newtype Boolean = Boolean { getBoolean :: Bool }
