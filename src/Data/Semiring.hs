@@ -132,6 +132,9 @@ newtype Arith a = Arith { getArith :: a }
 instance Num a => Semigroup (Arith a) where
   (<>) = (+)
 
+instance Num a => Monoid (Arith a) where
+  mempty = 0
+
 
 newtype IsZero = IsZero { isZero :: Bool }
 
