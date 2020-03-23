@@ -2,7 +2,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE UndecidableInstances #-}
 module Data.Functor.Trie
 ( Trie(..)
@@ -36,10 +35,10 @@ instance (IsOne a, Functor (i c), Monoid (i c (Trie i c a))) => Unital (Trie i c
 instance (IsOne a, Star a, Functor (i c), Monoid (i c (Trie i c a))) => Star (Trie i c a) where
   star (h :< t) = q where q = star h ><< (one :< fmap (>< q) t)
 
-instance (c ~ Key (i c), Monoid a, Monoid (i c (Trie i c a)), Singleton c (Trie i c a) (i c (Trie i c a))) => Indexable [c] a (Trie i c a) where
+instance (Monoid a, Monoid (i c (Trie i c a)), Singleton c (Trie i c a) (i c (Trie i c a))) => Indexable [c] a (Trie i c a) where
   (!) (b :< dp) = b <| (!) . (dp !)
 
-instance (c ~ Key (i c), Monoid a, Monoid (i c (Trie i c a)), Singleton c (Trie i c a) (i c (Trie i c a))) => Singleton [c] a (Trie i c a) where
+instance (Monoid a, Monoid (i c (Trie i c a)), Singleton c (Trie i c a) (i c (Trie i c a))) => Singleton [c] a (Trie i c a) where
   w |-> b = foldr (\ c t -> zero :< (c |-> t)) (b :< zero) w
 
 
