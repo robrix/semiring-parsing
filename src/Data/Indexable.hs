@@ -35,6 +35,10 @@ class Indexable a b x => Singleton a b x where
 instance (Eq a, Monoid b) => Singleton a b (a -> b) where
   a |-> b = \ a' -> if a == a' then b else mempty
 
+instance Ord a => Singleton a Bool (Set.Set a) where
+  a |-> True  = Set.singleton a
+  _ |-> False = Set.empty
+
 single :: (Singleton a b x, Unital b) => a -> x
 single = (|-> one)
 
