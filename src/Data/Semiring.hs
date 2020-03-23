@@ -27,6 +27,18 @@ zero = mempty
 class Monoid a => IsZero a where
   isZero :: a -> Bool
 
+instance IsZero () where
+  isZero _ = True
+
+instance (IsZero a, IsZero b) => IsZero (a, b) where
+  isZero (a, b) = isZero a && isZero b
+
+instance (IsZero a, IsZero b, IsZero c) => IsZero (a, b, c) where
+  isZero (a, b, c) = isZero a && isZero b && isZero c
+
+instance (IsZero a, IsZero b, IsZero c, IsZero d) => IsZero (a, b, c, d) where
+  isZero (a, b, c, d) = isZero a && isZero b && isZero c && isZero d
+
 
 -- | A 'Semiring' is a commutative 'Semigroup' with an additional associative operation, '><', which distributes over '<>'. E.g. if '<>' is “addition,” then '><' is “multiplication.”
 --
@@ -108,6 +120,18 @@ instance (Unital a, Unital b, Unital c, Unital d) => Unital (a, b, c, d) where
 
 class Unital r => IsOne r where
   isOne :: r -> Bool
+
+instance IsOne () where
+  isOne _ = True
+
+instance (IsOne a, IsOne b) => IsOne (a, b) where
+  isOne (a, b) = isOne a && isOne b
+
+instance (IsOne a, IsOne b, IsOne c) => IsOne (a, b, c) where
+  isOne (a, b, c) = isOne a && isOne b && isOne c
+
+instance (IsOne a, IsOne b, IsOne c, IsOne d) => IsOne (a, b, c, d) where
+  isOne (a, b, c, d) = isOne a && isOne b && isOne c && isOne d
 
 
 -- | Star 'Semiring's are 'Unital' semirings admitting infinite combinations via the Kleene 'star' (or closure) operation.
