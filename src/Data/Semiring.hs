@@ -194,6 +194,8 @@ instance (Star a, Star b, Star c, Star d) => Star (a, b, c, d) where
 instance Star b => Star (a -> b) where
   star = fmap star
 
+instance (Monoid a, Ord a) => Star (Set.Set a)
+
 
 newtype Arith a = Arith { getArith :: a }
   deriving (Bounded, Enum, Eq, Ix, Functor, Num, Ord, Read, Show)
