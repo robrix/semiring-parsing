@@ -9,8 +9,8 @@ module Data.Indexable
 , value
 ) where
 
-import Data.Semiring
 import Data.Kind (Type)
+import Data.Semiring
 
 type family Key (f :: Type -> Type) :: Type
 
