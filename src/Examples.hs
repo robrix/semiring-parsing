@@ -1,2 +1,10 @@
+{-# LANGUAGE FlexibleContexts #-}
 module Examples
-() where
+( a
+) where
+
+import Data.Indexable
+import Data.Semiring
+
+a :: (Singleton String b x, Unital b) => x
+a = single "a"
