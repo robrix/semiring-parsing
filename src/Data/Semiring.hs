@@ -16,6 +16,7 @@ module Data.Semiring
 import Data.Coerce (coerce)
 import Data.Functor.Const
 import Data.Functor.Identity
+import Data.Ix
 
 -- | The zero of a 'Monoid', defined as a synonym for 'mempty'.
 zero :: Monoid a => a
@@ -126,7 +127,7 @@ instance (Star a, Star b, Star c, Star d) => Star (a, b, c, d) where
 
 
 newtype Arith a = Arith { getArith :: a }
-  deriving (Functor)
+  deriving (Bounded, Enum, Eq, Ix, Functor, Num, Ord, Read, Show)
 
 
 newtype IsZero = IsZero { isZero :: Bool }
