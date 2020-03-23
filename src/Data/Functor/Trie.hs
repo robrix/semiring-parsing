@@ -37,9 +37,7 @@ instance (Star a, Functor i, LeftSemimodule a (i (Trie i a))) => Star (Trie i a)
   star (h :< t) = q where q = star h ><< (one :< fmap (>< q) t)
 
 instance (c ~ Key i, Monoid a, Monoid (i (Trie i a)), Singleton c (Trie i a) (i (Trie i a))) => Indexable [c] a (Trie i a) where
-  (b :< dp) ! w = case w of
-    []   -> b
-    c:cs -> dp ! c ! cs
+  (!) (b :< dp) = b <| (!) . (dp !)
 
 instance (c ~ Key i, Monoid a, Monoid (i (Trie i a)), Singleton c (Trie i a) (i (Trie i a))) => Singleton [c] a (Trie i a) where
   w |-> b = foldr (\ c t -> zero :< (c |-> t)) (b :< zero) w
