@@ -1,5 +1,7 @@
+{-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE UndecidableInstances #-}
 -- | A left- or right-semimodule over a 'Semiring' generalizes the concept of a vector space over a field.
 module Data.Semimodule
@@ -8,6 +10,7 @@ module Data.Semimodule
 ) where
 
 import Data.Functor.Identity
+import Data.Ix
 import Data.Semiring
 
 -- | Left-semimodules lift a 'Semiring'’s '><' operation to the semimodule’s elements.
@@ -63,3 +66,4 @@ instance (LeftSemimodule r a, LeftSemimodule r b, LeftSemimodule r c, LeftSemimo
 
 -- | Optimize another semimodule by applying the annihilation & identity laws.
 newtype Opt a = Opt { getOpt :: a }
+  deriving (Bounded, Enum, Eq, Ix, Functor, Num, Ord, Read, Show)
