@@ -245,5 +245,8 @@ instance Semiring Boolean where
 instance Unital Boolean where
   one = Boolean True
 
+instance IsOne Boolean where
+  isOne = (== one)
+
 instance Star Boolean where
   star _ = one
