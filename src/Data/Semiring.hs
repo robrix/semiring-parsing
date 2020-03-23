@@ -257,6 +257,7 @@ instance Closed Few where
 data Count a
   = Finite a
   | Infinity
+  deriving (Eq, Functor, Ord, Read, Show)
 
 
 newtype Boolean = Boolean { getBoolean :: Bool }
