@@ -23,7 +23,7 @@ zero :: Monoid a => a
 zero = mempty
 
 
-class IsZero a where
+class Monoid a => IsZero a where
   isZero :: a -> Bool
 
 
