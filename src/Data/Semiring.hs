@@ -15,6 +15,7 @@ module Data.Semiring
 , Boolean(..)
 ) where
 
+import Control.Applicative (liftA2)
 import Data.Coerce (coerce)
 import Data.Functor.Const
 import Data.Functor.Identity
@@ -93,6 +94,9 @@ instance (Semiring a, Semiring b, Semiring c) => Semiring (a, b, c) where
 
 instance (Semiring a, Semiring b, Semiring c, Semiring d) => Semiring (a, b, c, d) where
   (a1, b1, c1, d1) >< (a2, b2, c2, d2) = (a1 >< a2, b1 >< b2, c1 >< c2, d1 >< d2)
+
+instance Semiring b => Semiring (a -> b) where
+  (><) = liftA2 (><)
 
 
 -- | 'Unital' 'Semiring's are 'Monoid'al 'Semiring's with an addiitonal constant 'one' serving as the left- and right-identity of '><'.
