@@ -132,3 +132,6 @@ instance Monoid IsZero where
 
 instance Semiring IsZero where
   (><) = coerce (||)
+
+instance Unital IsZero where
+  one = IsZero False
