@@ -81,6 +81,9 @@ deriving instance Unital r => Unital (Identity r)
 instance (Unital a, Unital b) => Unital (a, b) where
   one = (one, one)
 
+instance (Unital a, Unital b, Unital c) => Unital (a, b, c) where
+  one = (one, one, one)
+
 
 -- | Star 'Semiring's are 'Unital' semirings admitting infinite combinations via the Kleene 'star' (or closure) operation.
 --
