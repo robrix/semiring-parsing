@@ -159,6 +159,13 @@ instance Semigroup Few where
 instance Monoid Few where
   mempty = Zero
 
+instance Semiring Few where
+  Zero >< _    = Zero
+  One  >< b    = b
+  _    >< Zero = Zero
+  a    >< One  = a
+  _    >< _    = More
+
 
 newtype IsZero = IsZero { isZero :: Bool }
   deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
