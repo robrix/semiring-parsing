@@ -270,6 +270,9 @@ instance Num a => Semiring (Count a) where
   Finite a >< Finite b = Finite (a * b)
   _        >< _        = Infinity
 
+instance Num a => Unital (Count a) where
+  one = Finite 1
+
 
 newtype Boolean = Boolean { getBoolean :: Bool }
   deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
