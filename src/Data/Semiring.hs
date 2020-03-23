@@ -106,6 +106,9 @@ class Unital r => Star r where
 deriving instance Star r => Star (Const r a)
 deriving instance Star r => Star (Identity r)
 
+instance Star () where
+  star _ = ()
+
 instance (Star a, Star b) => Star (a, b) where
   star (a, b) = (star a, star b)
 
