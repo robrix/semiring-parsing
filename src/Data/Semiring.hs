@@ -11,12 +11,8 @@ module Data.Semiring
 , Arith(..)
   -- * Characterization semirings
 , Few(..)
-, IsZero(..)
-, IsOne(..)
 ) where
 
-import Data.Bits (xor)
-import Data.Coerce (coerce)
 import Data.Functor.Const
 import Data.Functor.Identity
 import Data.Ix
@@ -172,34 +168,3 @@ instance Unital Few where
 instance Star Few where
   star Zero = one
   star _    = More
-
-
-newtype IsZero = IsZero { isZero :: Bool }
-  deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
-
-instance Semigroup IsZero where
-  (<>) = coerce (&&)
-
-instance Monoid IsZero where
-  mempty = IsZero True
-
-instance Semiring IsZero where
-  (><) = coerce (||)
-
-instance Unital IsZero where
-  one = IsZero False
-
-instance Star IsZero
-
-
-newtype IsOne = IsOne { isOne :: Bool }
-  deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
-
-instance Semigroup IsOne where
-  (<>) = coerce (xor :: Bool -> Bool -> Bool)
-
-instance Monoid IsOne where
-  mempty = IsOne False
-
-instance Semiring IsOne where
-  (><) = coerce (&&)
