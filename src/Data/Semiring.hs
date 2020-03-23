@@ -277,6 +277,10 @@ instance Semiring a => Semiring (Count a) where
 instance Unital a => Unital (Count a) where
   one = Finite one
 
+instance IsOne a => IsOne (Count a) where
+  isOne (Finite a) | isOne a = True
+  isOne _                    = False
+
 instance (IsZero a, Unital a) => Closed (Count a) where
   closure (Finite a) | isZero a = one
   closure _                     = Infinity
