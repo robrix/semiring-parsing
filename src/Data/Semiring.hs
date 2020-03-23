@@ -195,6 +195,9 @@ instance Semigroup Few where
 instance Monoid Few where
   mempty = Zero
 
+instance IsZero Few where
+  isZero = (== Zero)
+
 instance Semiring Few where
   Zero >< _    = Zero
   One  >< b    = b
@@ -204,6 +207,9 @@ instance Semiring Few where
 
 instance Unital Few where
   one = One
+
+instance IsOne Few where
+  isOne = (== One)
 
 instance Star Few where
   star Zero = one
