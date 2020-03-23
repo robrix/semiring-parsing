@@ -126,3 +126,6 @@ newtype Zero = Zero { isZero :: Bool }
 
 instance Semigroup Zero where
   (<>) = coerce (&&)
+
+instance Monoid Zero where
+  mempty = Zero True
