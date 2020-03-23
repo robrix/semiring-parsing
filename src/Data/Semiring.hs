@@ -81,6 +81,9 @@ class (Monoid r, Semiring r) => Unital r where
 deriving instance Unital r => Unital (Const r a)
 deriving instance Unital r => Unital (Identity r)
 
+instance Unital () where
+  one = ()
+
 instance (Unital a, Unital b) => Unital (a, b) where
   one = (one, one)
 
