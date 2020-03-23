@@ -61,4 +61,5 @@ instance (LeftSemimodule r a, LeftSemimodule r b, LeftSemimodule r c, LeftSemimo
   a ><< (b, c, d, e) = (a ><< b, a ><< c, a ><< d, a ><< e)
 
 
+-- | Optimize another semimodule by applying the annihilation & identity laws.
 newtype Opt a = Opt { getOpt :: a }
