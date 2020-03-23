@@ -167,3 +167,6 @@ newtype IsOne = IsOne { isOne :: Bool }
 
 instance Semigroup IsOne where
   (<>) = coerce (xor :: Bool -> Bool -> Bool)
+
+instance Monoid IsOne where
+  mempty = IsOne False
