@@ -105,3 +105,6 @@ instance (Star a, Star b) => Star (a, b) where
 
 instance (Star a, Star b, Star c) => Star (a, b, c) where
   star (a, b, c) = (star a, star b, star c)
+
+instance (Star a, Star b, Star c, Star d) => Star (a, b, c, d) where
+  star (a, b, c, d) = (star a, star b, star c, star d)
