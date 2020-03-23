@@ -102,3 +102,6 @@ deriving instance Star r => Star (Identity r)
 
 instance (Star a, Star b) => Star (a, b) where
   star (a, b) = (star a, star b)
+
+instance (Star a, Star b, Star c) => Star (a, b, c) where
+  star (a, b, c) = (star a, star b, star c)
