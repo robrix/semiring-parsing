@@ -23,6 +23,9 @@ instance (Semigroup a, Semigroup (i c (Trie i c a))) => Semigroup (Trie i c a) w
 instance (Monoid a, Monoid (i c (Trie i c a))) => Monoid (Trie i c a) where
   mempty = mempty :< mempty
 
+instance (IsZero a, IsZero (i c (Trie i c a))) => IsZero (Trie i c a) where
+  isZero (h :< t) = isZero h && isZero t
+
 instance (IsOne a, Functor (i c), Monoid (i c (Trie i c a))) => LeftSemimodule a (Trie i c a) where
   mul s (h :< t) = s >< h :< fmap (s ><<) t
 
