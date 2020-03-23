@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE StandaloneDeriving #-}
 -- | Semirings of various flavours.
@@ -125,6 +126,7 @@ instance (Star a, Star b, Star c, Star d) => Star (a, b, c, d) where
 
 
 newtype Arith a = Arith { getArith :: a }
+  deriving (Functor)
 
 
 newtype IsZero = IsZero { isZero :: Bool }
