@@ -1,7 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE TypeFamilies #-}
 module Data.Map.Modular
 ( Map(..)
 ) where
@@ -39,5 +38,3 @@ instance (Ord k, Semigroup k, Monoid v, Semiring v) => Semiring (Map k v) where
 
 instance (Ord k, Monoid k, Unital v) => Unital (Map k v) where
   one = zero |-> one
-
-type instance Key (Map k) = k

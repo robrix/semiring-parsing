@@ -1,22 +1,14 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE FunctionalDependencies #-}
-{-# LANGUAGE TypeFamilies #-}
 module Data.Indexable
-( Key
-, Indexable(..)
+( Indexable(..)
 , Singleton(..)
 , single
 , value
 ) where
 
-import           Data.Kind (Type)
 import           Data.Semiring
 import qualified Data.Set as Set
-
-type family Key (f :: Type -> Type) :: Type
-
-type instance Key ((->) k) = k
-
 
 class Indexable a b x | x -> a b where
   (!) :: x -> a -> b
