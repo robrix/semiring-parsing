@@ -57,6 +57,9 @@ deriving instance Semiring r => Semiring (Identity r)
 instance (Semiring a, Semiring b) => Semiring (a, b) where
   (a1, b1) >< (a2, b2) = (a1 >< a2, b1 >< b2)
 
+instance (Semiring a, Semiring b, Semiring c) => Semiring (a, b, c) where
+  (a1, b1, c1) >< (a2, b2, c2) = (a1 >< a2, b1 >< b2, c1 >< c2)
+
 
 -- | 'Unital' 'Semiring's are 'Monoid'al 'Semiring's with an addiitonal constant 'one' serving as the left- and right-identity of '><'.
 --
