@@ -38,3 +38,6 @@ instance (c ~ Key i, Monoid a, Monoid (i (Trie i a)), Singleton c (Trie i a) (i 
   (b :< dp) ! w = case w of
     []   -> b
     c:cs -> dp ! c ! cs
+
+instance (c ~ Key i, Monoid a, Monoid (i (Trie i a)), Singleton c (Trie i a) (i (Trie i a))) => Singleton [c] a (Trie i a) where
+  w |-> b = foldr (\ c t -> zero :< (c |-> t)) (b :< zero) w
