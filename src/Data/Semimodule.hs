@@ -47,6 +47,9 @@ class (Semiring r, Monoid m) => LeftSemimodule r m | m -> r where
   (><<) :: r -> m -> m
   infixr 7 ><<
 
+instance (Monoid r, Semiring r) => LeftSemimodule r (a -> r) where
+  a ><< b = (a ><) <$> b
+
 -- | Every 'Semiring' forms a 'LeftSemimodule' with itself, which we model using 'Identity' to avoid overlapping instances.
 instance (Monoid r, Semiring r) => LeftSemimodule r (Identity r) where
   a ><< b = (a ><) <$> b
