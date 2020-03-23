@@ -157,5 +157,4 @@ instance Semiring IsZero where
 instance Unital IsZero where
   one = IsZero False
 
-instance Star IsZero where
-  star = id
+instance Star IsZero
