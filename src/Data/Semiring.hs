@@ -14,6 +14,7 @@ module Data.Semiring
 , IsOne(..)
 ) where
 
+import Data.Bits (xor)
 import Data.Coerce (coerce)
 import Data.Functor.Const
 import Data.Functor.Identity
@@ -163,3 +164,6 @@ instance Star IsZero
 
 newtype IsOne = IsOne { isOne :: Bool }
   deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
+
+instance Semigroup IsOne where
+  (<>) = coerce (xor :: Bool -> Bool -> Bool)
