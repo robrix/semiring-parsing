@@ -9,8 +9,9 @@ module Data.Semiring
 , Star(..)
   -- * Arithmetic semiring
 , Arith(..)
-  -- * IsZero semiring
+  -- * Characterization semirings
 , IsZero(..)
+, IsOne(..)
 ) where
 
 import Data.Coerce (coerce)
@@ -158,3 +159,6 @@ instance Unital IsZero where
   one = IsZero False
 
 instance Star IsZero
+
+
+newtype IsOne = IsOne { isOne :: Bool }
