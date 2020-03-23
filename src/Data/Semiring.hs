@@ -259,21 +259,21 @@ data Count a
   | Infinity
   deriving (Eq, Foldable, Functor, Ord, Read, Show, Traversable)
 
-instance Num a => Semigroup (Count a) where
-  Finite a <> Finite b = Finite (a + b)
+instance Semigroup a => Semigroup (Count a) where
+  Finite a <> Finite b = Finite (a <> b)
   _        <> _        = Infinity
 
-instance Num a => Monoid (Count a) where
-  mempty = Finite 0
+instance Monoid a => Monoid (Count a) where
+  mempty = Finite mempty
 
-instance Num a => Semiring (Count a) where
-  Finite a >< Finite b = Finite (a * b)
+instance Semiring a => Semiring (Count a) where
+  Finite a >< Finite b = Finite (a >< b)
   _        >< _        = Infinity
 
-instance Num a => Unital (Count a) where
-  one = Finite 1
+instance Unital a => Unital (Count a) where
+  one = Finite one
 
-instance (Num a, IsZero a) => Closed (Count a) where
+instance (IsZero a, Unital a) => Closed (Count a) where
   closure (Finite a) | isZero a = one
   closure _                     = Infinity
 
