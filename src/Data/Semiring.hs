@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveFunctor #-}
+{-# LANGUAGE DeriveTraversable #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE StandaloneDeriving #-}
 -- | Semirings of various flavours.
@@ -198,7 +198,7 @@ instance (Monoid a, Ord a) => Closed (Set.Set a)
 
 
 newtype Arith a = Arith { getArith :: a }
-  deriving (Bounded, Enum, Eq, Ix, Functor, Num, Ord, Read, Show)
+  deriving (Bounded, Enum, Eq, Ix, Foldable, Functor, Num, Ord, Read, Show, Traversable)
 
 instance Num a => Semigroup (Arith a) where
   (<>) = (+)
@@ -257,7 +257,7 @@ instance Closed Few where
 data Count a
   = Finite a
   | Infinity
-  deriving (Eq, Functor, Ord, Read, Show)
+  deriving (Eq, Foldable, Functor, Ord, Read, Show, Traversable)
 
 
 newtype Boolean = Boolean { getBoolean :: Bool }
