@@ -135,6 +135,9 @@ instance Num a => Semigroup (Arith a) where
 instance Num a => Monoid (Arith a) where
   mempty = 0
 
+instance Num a => Semiring (Arith a) where
+  (><) = (*)
+
 
 newtype IsZero = IsZero { isZero :: Bool }
 
