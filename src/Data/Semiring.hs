@@ -266,6 +266,10 @@ instance Num a => Semigroup (Count a) where
 instance Num a => Monoid (Count a) where
   mempty = Finite 0
 
+instance Num a => Semiring (Count a) where
+  Finite a >< Finite b = Finite (a * b)
+  _        >< _        = Infinity
+
 
 newtype Boolean = Boolean { getBoolean :: Bool }
   deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
