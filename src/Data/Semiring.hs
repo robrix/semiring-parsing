@@ -15,11 +15,12 @@ module Data.Semiring
 , Boolean(..)
 ) where
 
-import Control.Applicative (liftA2)
-import Data.Coerce (coerce)
-import Data.Functor.Const
-import Data.Functor.Identity
-import Data.Ix
+import           Control.Applicative (liftA2)
+import           Data.Coerce (coerce)
+import           Data.Functor.Const
+import           Data.Functor.Identity
+import           Data.Ix
+import qualified Data.Set as Set
 
 -- | The zero of a 'Monoid', defined as a synonym for 'mempty'.
 zero :: Monoid a => a
@@ -97,6 +98,13 @@ instance (Semiring a, Semiring b, Semiring c, Semiring d) => Semiring (a, b, c, 
 
 instance Semiring b => Semiring (a -> b) where
   (><) = liftA2 (><)
+
+instance (Monoid a, Ord a) => Semiring (Set.Set a) where
+  p >< q = Set.fromList
+    [ u <> v
+    | u <- Set.toList p
+    , v <- Set.toList q
+    ]
 
 
 -- | 'Unital' 'Semiring's are 'Monoid'al 'Semiring's with an addiitonal constant 'one' serving as the left- and right-identity of '><'.
