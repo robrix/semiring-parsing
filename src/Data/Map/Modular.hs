@@ -26,6 +26,9 @@ instance (Ord k, Semigroup v) => Semigroup (Map k v) where
 instance (Ord k, Monoid v) => Monoid (Map k v) where
   mempty = Map Map.empty
 
+instance (Ord k, Monoid v) => IsZero (Map k v) where
+  isZero = Map.null . getMap
+
 instance (Ord k, Monoid v, Semiring v) => LeftSemimodule v (Map k v) where
   mul v m = (v ><) <$> m
 
