@@ -6,6 +6,8 @@ module Data.Semiring
 , Semiring(..)
 , Unital(..)
 , Star(..)
+  -- * Arithmetic semiring
+, Arith(..)
   -- * IsZero semiring
 , IsZero(..)
 ) where
@@ -120,6 +122,9 @@ instance (Star a, Star b, Star c) => Star (a, b, c) where
 
 instance (Star a, Star b, Star c, Star d) => Star (a, b, c, d) where
   star (a, b, c, d) = (star a, star b, star c, star d)
+
+
+newtype Arith a = Arith { getArith :: a }
 
 
 newtype IsZero = IsZero { isZero :: Bool }
