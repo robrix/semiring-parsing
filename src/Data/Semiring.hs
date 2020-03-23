@@ -7,6 +7,7 @@ module Data.Semiring
 , IsZero(..)
 , Semiring(..)
 , Unital(..)
+, IsOne(..)
 , Star(..)
   -- * Arithmetic semiring
 , Arith(..)
@@ -103,6 +104,10 @@ instance (Unital a, Unital b, Unital c) => Unital (a, b, c) where
 
 instance (Unital a, Unital b, Unital c, Unital d) => Unital (a, b, c, d) where
   one = (one, one, one, one)
+
+
+class Unital r => IsOne r where
+  isOne :: r -> Bool
 
 
 -- | Star 'Semiring's are 'Unital' semirings admitting infinite combinations via the Kleene 'star' (or closure) operation.
