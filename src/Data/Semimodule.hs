@@ -48,6 +48,9 @@ class (Semiring r, Monoid m) => LeftSemimodule r m | m -> r where
 instance (Monoid r, Semiring r) => LeftSemimodule r (Identity r) where
   a ><< b = (a ><) <$> b
 
+instance LeftSemimodule () () where
+  _ ><< _ = ()
+
 instance (LeftSemimodule r a, LeftSemimodule r b) => LeftSemimodule r (a, b) where
   a ><< (b, c) = (a ><< b, a ><< c)
 
