@@ -63,6 +63,9 @@ instance (LeftSemimodule r a, LeftSemimodule r b, LeftSemimodule r c) => LeftSem
 instance (LeftSemimodule r a, LeftSemimodule r b, LeftSemimodule r c, LeftSemimodule r d) => LeftSemimodule r (a, b, c, d) where
   a ><< (b, c, d, e) = (a ><< b, a ><< c, a ><< d, a ><< e)
 
+instance Semiring r => LeftSemimodule r [r] where
+  a ><< b = map (a ><) b
+
 
 -- | Optimize another semimodule by applying the annihilation & identity laws.
 newtype Opt a = Opt { getOpt :: a }
