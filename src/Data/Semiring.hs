@@ -162,3 +162,4 @@ instance Star IsZero
 
 
 newtype IsOne = IsOne { isOne :: Bool }
+  deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
