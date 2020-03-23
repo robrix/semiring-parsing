@@ -10,6 +10,7 @@ module Data.Semiring
 , Zero(..)
 ) where
 
+import Data.Coerce (coerce)
 import Data.Functor.Const
 import Data.Functor.Identity
 
@@ -122,3 +123,6 @@ instance (Star a, Star b, Star c, Star d) => Star (a, b, c, d) where
 
 
 newtype Zero = Zero { isZero :: Bool }
+
+instance Semigroup Zero where
+  (<>) = coerce (&&)
