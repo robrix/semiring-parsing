@@ -237,7 +237,7 @@ instance Monoid Boolean where
   mempty = Boolean False
 
 instance IsZero Boolean where
-  isZero = (== Boolean False)
+  isZero = (== zero)
 
 instance Semiring Boolean where
   (><) = coerce (&&)
