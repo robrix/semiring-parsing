@@ -67,3 +67,8 @@ instance (LeftSemimodule r a, LeftSemimodule r b, LeftSemimodule r c, LeftSemimo
 -- | Optimize another semimodule by applying the annihilation & identity laws.
 newtype Opt a = Opt { getOpt :: a }
   deriving (Bounded, Enum, Eq, Ix, Functor, Monoid, Num, Ord, Read, Semigroup, Show)
+
+instance LeftSemimodule r a => LeftSemimodule (Few, r) (Opt a) where
+  (Zero, _) ><< _ = zero
+  (One,  _) ><< b = b
+  (_,    a) ><< b = Opt $ a ><< getOpt b
