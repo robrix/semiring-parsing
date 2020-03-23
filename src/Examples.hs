@@ -3,6 +3,7 @@ module Examples
 ( a
 , b
 , atoz
+, fishy
 ) where
 
 import Data.Foldable (fold)
@@ -15,3 +16,6 @@ b = single "b"
 
 atoz :: (Singleton String b x, Unital b, Monoid x) => x
 atoz = fold [ single [c] | c <- ['a'..'z'] ]
+
+fishy :: (Singleton String b x, Unital b, Star x) => x
+fishy = star atoz >< single "fish" >< star atoz
