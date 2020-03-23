@@ -9,8 +9,9 @@ module Data.Indexable
 , value
 ) where
 
-import Data.Kind (Type)
-import Data.Semiring
+import           Data.Kind (Type)
+import           Data.Semiring
+import qualified Data.Set as Set
 
 type family Key (f :: Type -> Type) :: Type
 
@@ -22,6 +23,9 @@ class Indexable a b x | x -> a b where
 
 instance Indexable a b (a -> b) where
   (!) = ($)
+
+instance Ord a => Indexable a Bool (Set.Set a) where
+  s ! a = Set.member a s
 
 
 class Indexable a b x => Singleton a b x where
