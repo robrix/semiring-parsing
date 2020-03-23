@@ -41,3 +41,8 @@ instance (Ord k, Semigroup k, Monoid v, Semiring v) => Semiring (Map k v) where
 
 instance (Ord k, Monoid k, Unital v) => Unital (Map k v) where
   one = zero |-> one
+
+instance (Ord k, IsZero k, IsOne v) => IsOne (Map k v) where
+  isOne m = case Map.toList (getMap m) of
+    [ (k, v) ] | isZero k, isOne v -> True
+    _                              -> False
