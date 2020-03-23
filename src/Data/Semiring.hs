@@ -12,6 +12,7 @@ module Data.Semiring
   -- * Concrete semirings
 , Arith(..)
 , Few(..)
+, Count(..)
 , Boolean(..)
 ) where
 
@@ -251,6 +252,11 @@ instance IsOne Few where
 instance Closed Few where
   closure Zero = one
   closure _    = More
+
+
+data Count a
+  = Finite a
+  | Infinity
 
 
 newtype Boolean = Boolean { getBoolean :: Bool }
