@@ -10,6 +10,7 @@ module Data.Semiring
   -- * Arithmetic semiring
 , Arith(..)
   -- * Characterization semirings
+, Few(..)
 , IsZero(..)
 , IsOne(..)
 ) where
@@ -142,6 +143,13 @@ instance Num a => Semiring (Arith a) where
 
 instance Num a => Unital (Arith a) where
   one = 1
+
+
+data Few
+  = Zero
+  | One
+  | More
+  deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
 
 
 newtype IsZero = IsZero { isZero :: Bool }
