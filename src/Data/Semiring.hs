@@ -9,10 +9,10 @@ module Data.Semiring
 , Unital(..)
 , IsOne(..)
 , Star(..)
-  -- * Arithmetic semiring
+  -- * Concrete semirings
 , Arith(..)
-  -- * Characterization semirings
 , Few(..)
+, Boolean(..)
 ) where
 
 import Data.Functor.Const
@@ -220,3 +220,6 @@ instance IsOne Few where
 instance Star Few where
   star Zero = one
   star _    = More
+
+
+newtype Boolean = Boolean { getBoolean :: Bool }
