@@ -51,6 +51,9 @@ instance (Monoid r, Semiring r) => LeftSemimodule r (Identity r) where
 instance (LeftSemimodule r a, LeftSemimodule r b) => LeftSemimodule r (a, b) where
   a ><< (b, c) = (a ><< b, a ><< c)
 
+instance (LeftSemimodule r a, LeftSemimodule r b, LeftSemimodule r c) => LeftSemimodule r (a, b, c) where
+  a ><< (b, c, d) = (a ><< b, a ><< c, a ><< d)
+
 
 class (Semiring r, Monoid m) => RightSemimodule r m | m -> r where
   (>><) :: m -> r -> m
