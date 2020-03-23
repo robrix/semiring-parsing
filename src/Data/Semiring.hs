@@ -45,6 +45,9 @@ instance (IsZero a, IsZero b, IsZero c) => IsZero (a, b, c) where
 instance (IsZero a, IsZero b, IsZero c, IsZero d) => IsZero (a, b, c, d) where
   isZero (a, b, c, d) = isZero a && isZero b && isZero c && isZero d
 
+instance Ord a => IsZero (Set.Set a) where
+  isZero = Set.null
+
 
 -- | A 'Semiring' is a commutative 'Semigroup' with an additional associative operation, '><', which distributes over '<>'. E.g. if '<>' is “addition,” then '><' is “multiplication.”
 --
