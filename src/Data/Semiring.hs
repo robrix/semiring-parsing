@@ -266,6 +266,10 @@ instance Semigroup a => Semigroup (Count a) where
 instance Monoid a => Monoid (Count a) where
   mempty = Finite mempty
 
+instance IsZero a => IsZero (Count a) where
+  isZero (Finite a) | isZero a = True
+  isZero _                     = False
+
 instance Semiring a => Semiring (Count a) where
   Finite a >< Finite b = Finite (a >< b)
   _        >< _        = Infinity
