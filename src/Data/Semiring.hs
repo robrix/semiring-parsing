@@ -78,6 +78,9 @@ class (Monoid r, Semiring r) => Unital r where
 deriving instance Unital r => Unital (Const r a)
 deriving instance Unital r => Unital (Identity r)
 
+instance (Unital a, Unital b) => Unital (a, b) where
+  one = (one, one)
+
 
 -- | Star 'Semiring's are 'Unital' semirings admitting infinite combinations via the Kleene 'star' (or closure) operation.
 --
