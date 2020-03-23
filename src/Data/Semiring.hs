@@ -259,6 +259,10 @@ data Count a
   | Infinity
   deriving (Eq, Foldable, Functor, Ord, Read, Show, Traversable)
 
+instance Num a => Semigroup (Count a) where
+  Finite a <> Finite b = Finite (a + b)
+  _        <> _        = Infinity
+
 
 newtype Boolean = Boolean { getBoolean :: Bool }
   deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
