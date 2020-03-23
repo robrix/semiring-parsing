@@ -22,7 +22,6 @@ import           Control.Applicative (liftA2)
 import           Data.Functor.Const
 import           Data.Functor.Identity
 import           Data.Kind (Type)
-import           Data.Monoid (Sum(..))
 import qualified Data.Set as Set
 
 -- | The zero of a 'Monoid', defined as a synonym for 'mempty'.
@@ -55,9 +54,6 @@ instance Ord a => IsZero (Set.Set a) where
 -- | 'Splittable' 'Monoid's have an additional 'splits' operation, a multi-valued inverse of '<>'.
 class Monoid a => Splittable a where
   splits :: a -> [(a, a)]
-
-instance (Enum a, Num a) => Splittable (Sum a) where
-  splits n = [ (Sum i, n - Sum i) | i <- [0..getSum n] ]
 
 
 -- | A 'Semiring' is a commutative 'Semigroup' with an additional associative operation, '><', which distributes over '<>'. E.g. if '<>' is “addition,” then '><' is “multiplication.”
