@@ -136,6 +136,9 @@ instance (Unital a, Unital b, Unital c, Unital d) => Unital (a, b, c, d) where
 instance Unital b => Unital (a -> b) where
   one = const one
 
+instance (Monoid a, Ord a) => Unital (Set.Set a) where
+  one = Set.singleton mempty
+
 
 class (IsZero r, Unital r) => IsOne r where
   isOne :: r -> Bool
