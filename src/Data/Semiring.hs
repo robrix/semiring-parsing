@@ -151,6 +151,11 @@ data Few
   | More
   deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
 
+instance Semigroup Few where
+  Zero <> b    = b
+  a    <> Zero = a
+  _    <> _    = More
+
 
 newtype IsZero = IsZero { isZero :: Bool }
   deriving (Bounded, Enum, Eq, Ix, Ord, Read, Show)
