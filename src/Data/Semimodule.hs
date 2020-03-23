@@ -4,6 +4,7 @@
 -- | A left- or right-semimodule over a 'Semiring' generalizes the concept of a vector space over a field.
 module Data.Semimodule
 ( LeftSemimodule(..)
+, Opt(..)
 ) where
 
 import Data.Functor.Identity
@@ -58,3 +59,6 @@ instance (LeftSemimodule r a, LeftSemimodule r b, LeftSemimodule r c) => LeftSem
 
 instance (LeftSemimodule r a, LeftSemimodule r b, LeftSemimodule r c, LeftSemimodule r d) => LeftSemimodule r (a, b, c, d) where
   a ><< (b, c, d, e) = (a ><< b, a ><< c, a ><< d, a ><< e)
+
+
+newtype Opt a = Opt { getOpt :: a }
