@@ -236,6 +236,9 @@ instance Semigroup Boolean where
 instance Monoid Boolean where
   mempty = Boolean False
 
+instance IsZero Boolean where
+  isZero = (== Boolean False)
+
 instance Semiring Boolean where
   (><) = coerce (&&)
 
