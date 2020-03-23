@@ -6,8 +6,8 @@ module Data.Semiring
 , Semiring(..)
 , Unital(..)
 , Star(..)
-  -- * Zero semiring
-, Zero(..)
+  -- * IsZero semiring
+, IsZero(..)
 ) where
 
 import Data.Coerce (coerce)
@@ -122,10 +122,10 @@ instance (Star a, Star b, Star c, Star d) => Star (a, b, c, d) where
   star (a, b, c, d) = (star a, star b, star c, star d)
 
 
-newtype Zero = Zero { isZero :: Bool }
+newtype IsZero = IsZero { isZero :: Bool }
 
-instance Semigroup Zero where
+instance Semigroup IsZero where
   (<>) = coerce (&&)
 
-instance Monoid Zero where
-  mempty = Zero True
+instance Monoid IsZero where
+  mempty = IsZero True
