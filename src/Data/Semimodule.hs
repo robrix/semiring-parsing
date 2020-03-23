@@ -1,5 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE UndecidableInstances #-}
 -- | A left- or right-semimodule over a 'Semiring' generalizes the concept of a vector space over a field.
 module Data.Semimodule
 ( LeftSemimodule(..)
@@ -46,6 +47,9 @@ class (Semiring r, Monoid m) => LeftSemimodule r m | m -> r where
 -- | Every 'Semiring' forms a 'LeftSemimodule' with itself, which we model using 'Identity' to avoid overlapping instances.
 instance (Monoid r, Semiring r) => LeftSemimodule r (Identity r) where
   a ><< b = (a ><) <$> b
+
+instance (LeftSemimodule r a, LeftSemimodule r b) => LeftSemimodule r (a, b) where
+  a ><< (b, c) = (a ><< b, a ><< c)
 
 
 class (Semiring r, Monoid m) => RightSemimodule r m | m -> r where
