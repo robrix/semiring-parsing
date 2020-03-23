@@ -125,6 +125,9 @@ instance (Unital a, Unital b, Unital c) => Unital (a, b, c) where
 instance (Unital a, Unital b, Unital c, Unital d) => Unital (a, b, c, d) where
   one = (one, one, one, one)
 
+instance Unital b => Unital (a -> b) where
+  one = const one
+
 
 class (IsZero r, Unital r) => IsOne r where
   isOne :: r -> Bool
