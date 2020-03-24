@@ -48,7 +48,7 @@ instance (Monoid a, Monoid (i c (Trie i c a)), Singleton c (Trie i c a) (i c (Tr
   w |-> b = foldr (\ c t -> zero :< (c |-> t)) (b :< zero) w
 
 
-(<|) :: b -> (c -> ([c] -> b)) -> ([c] -> b)
+(<|) :: b -> (c -> [c] -> b) -> ([c] -> b)
 b <| h = \case
   []   -> b
   c:cs -> h c cs
