@@ -42,7 +42,7 @@ instance (IsOne a, Closed a, Functor (i c), Monoid (i c (Trie i c a))) => Closed
   closure (h :< t) = q where q = closure h ><< (one :< fmap (>< q) t)
 
 instance Indexable c (Trie i c a) (i c (Trie i c a)) => Indexable [c] a (Trie i c a) where
-  (!) (b :< dp) = b <| (!) . (dp !)
+  (!) (b :< dp) = b <| \ c cs -> dp ! c ! cs
 
 instance (Monoid a, Monoid (i c (Trie i c a)), Singleton c (Trie i c a) (i c (Trie i c a))) => Singleton [c] a (Trie i c a) where
   w |-> b = foldr (\ c t -> zero :< (c |-> t)) (b :< zero) w
